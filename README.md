@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GitHub Explorer
 
-## Getting Started
+GitHub Explorer is a web application that allows users to browse issues in the React repository with pagination and view details of a particular issue along with its comments.
 
-First, run the development server:
+## Requirements
+- Node JS >= v18.20.4
+- npm >= v10.7.0
 
-```bash
+## Installation
+
+Follow these steps to set up and run the application:
+
+1. **Clone the repository:**
+
+```
+git clone git@github.com:aderiushev/mdmrkt-assessment.git
+cd mdmrkt-assessment
+````
+
+2. **Generate a GitHub Personal Access Token:**
+
+- Go to GitHub Settings.
+- Click on "Generate new token".
+- Select the scopes you need (e.g., repo).
+- Generate the token and copy it.
+- Create a .env file:  Create a .env file in the root directory of the project and add your GitHub token:
+```
+GITHUB_TOKEN=your_personal_access_token
+```
+- Install the dependencies:
+```
+npm install
+```
+- Run the development server:  
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+- Open the application:  Open http://localhost:3000 in your browser to see the application.  
+
+You can also run the application in production mode:
+```
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Usage**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Search Form:  
+   On the home page, you will see a search form.
+   Enter a search term and select the issue status (Open or Closed).
+   Click the "Search" button to browse issues in the React repository.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Browse Issues:  
+   
+   The search results will display a list of issues with pagination.
+   Click on an issue to navigate to the details page.
 
-## Learn More
+- View Issue Details:  
+   On the issue details page, you can see the issue title, body, and comments.
+   Use the "Back" button to return to the search results.
+     
+Enjoy exploring GitHub issues with GitHub Explorer!
 
-To learn more about Next.js, take a look at the following resources:
+4. **Testing**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Run unit tests:  
+```
+npm test
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Run e2e tests:
+```
+npm run e2e
+```
