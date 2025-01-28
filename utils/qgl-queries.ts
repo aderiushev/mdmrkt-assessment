@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const SEARCH_ISSUES_QUERY = gql`
   query SearchIssues($query: String!, $after: String) {
-    search(query: $query, type: ISSUE, first: 10, after: $after) {
+    search(query: $query, type: ISSUE, first: 5, after: $after) {
       edges {
         node {
           ... on Issue {

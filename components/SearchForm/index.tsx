@@ -1,17 +1,28 @@
 import { useState } from 'react';
 import { StyledButton, StyledForm, StyledInput, StyledSelect } from './styles';
+import {useSearchParams} from "next/navigation";
 
-interface SearchFormProps {
-  onSearch: (query: string) => void;
+export type OnSearchPayload = {
+  term: string;
+  status: 'OPEN' | 'CLOSED';
+}
+
+type SearchFormProps = {
+  onSearch: (payload: OnSearchPayload) => void;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
-  const [term, setTerm] = useState('');
-  const [status, setStatus] = useState('OPEN');
+  const searchParams = useSearchParams();
+  const queryParam = searchParams.get('query');
+  const statusParam = searchParams.get('status');
+  const properStatusParam = statusParam === 'OPEN' || statusParam === 'CLOSED' ? statusParam : 'OPEN';
+
+  const [term, setTerm] = useState(queryParam || '');
+  const [status, setStatus] = useState<'OPEN' | 'CLOSED'>(properStatusParam);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(`repo:facebook/react is:issue is:${status.toLowerCase()} ${term}`);
+    onSearch({ term, status });
   };
 
   return (
@@ -25,7 +36,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         required
         minLength={3}
       />
-      <StyledSelect data-testid="status-select" value={status} onChange={(e) => setStatus(e.target.value)}>
+      <StyledSelect data-testid="status-select" value={status} onChange={(e) => setStatus(e.target.value as 'OPEN' | 'CLOSED')}>
         <option value="OPEN" data-testid="status-select-item-open">Open</option>
         <option value="CLOSED" data-testid="status-select-item-closed">Closed</option>
       </StyledSelect>
